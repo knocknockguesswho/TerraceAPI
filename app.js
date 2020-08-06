@@ -15,9 +15,6 @@ const routes = require('./src/routes/index');
 
 io.on('connection', socket =>{
   console.log('user connected');
-  socket.on('chat-message', msg=>{
-      consolelog(msg)
-  })
   socket.on('disconnect', ()=>{
     console.log('user disconnected')
   })

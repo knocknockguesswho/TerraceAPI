@@ -35,7 +35,7 @@ module.exports = {
                 const passwordMatch = bcrypt.compareSync(loginData.password, dbPassword);
 
                 if(passwordMatch){
-                    delete result[0].password;
+                    // delete result[0].password;
                     const tokenData = {...result[0]};
                     const token = jwt.sign(tokenData, config.jwtSecretKey, {expiresIn: '3h'});
                     result[0].token = token;
