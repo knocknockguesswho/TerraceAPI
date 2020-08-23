@@ -29,7 +29,7 @@ module.exports = {
   },
   showAllMessagesModel: function(user_id){
     return new Promise((resolve, reject)=>{
-      connection.query(`SELECT m.id as id_chat, m.sender_id, m.receiver_id, m.message, m.chatroom_id, m.created_at, us.id as id_us, us.fullname as sender_fullname, us.avatar as sender_avatar, ur.id as id_ur, ur.fullname as receiver_fullname, ur.avatar as receiver_avatar FROM conversation m INNER JOIN users us ON m.sender_id=us.id INNER JOIN users ur ON m.receiver_id=ur.id WHERE m.id IN (SELECT MAX(id) FROM conversation WHERE receiver_id=? OR sender_id=? GROUP BY chatroom_id) ORDER BY m.created_at`, [user_id, user_id], function(error, result){
+      connection.query(`SELECT m.id as id_chat, m.sender_id, m.receiver_id, m.message, m.chatroom_id, m.created_at, us.id as id_us, us.fullname as sender_fullname, us.avatar as sender_avatar, ur.id as id_ur, ur.fullname as receiver_fullname, ur.avatar as receiver_avatar FROM conversation m INNER JOIN users us ON m.sender_id=us.id INNER JOIN users ur ON m.receiver_id=ur.id WHERE m.id IN (SELECT id FROM conversation WHERE receiver_id=? OR sender_id=? GROUP BY chatroom_id) ORDER BY m.created_at`, [user_id, user_id], function(error, result){
         if(error){
           reject(error)
         }
