@@ -20,7 +20,9 @@ const upload = multer({
 
 router.get('/showAllUsers', userController.showAllUsers);
 router.get('/showFriends/:id', userController.showFriends);
+router.get('/searchUser/:name', userController.searchUsers)
 router.post('/addFriend/:id', userController.addFriend);
+router.put('/setLocation/:id', userController.setLocation);
 router.delete('/deleteFriend/:id', userController.deleteFriend);
 
 //1. post Contact (add user to contactlist) ###DONE

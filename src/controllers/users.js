@@ -45,5 +45,27 @@ module.exports = {
       console.log(error);
       return helper.response(res, `fail`, `Internal Server Error`, 500);
     }
+  },
+  searchUsers: async function(req, res){
+    const name = req.params.name;
+    try{
+      const result = await usersModel.searchUsersModel(name);
+      return helper.response(res, `success`, result, 200);
+    } catch(error){
+      console.log(error);
+      return helper.response(res, `fail`, `Internal Server Error`, 500);
+    }
+  },
+  setLocation: async function(req, res){
+    const lat = req.body.latitude;
+    const lon = req.body.longitude;
+    const id = req.params.id
+    try{
+      const result = await usersModel.setLocationModel(lat, lon, id);
+      return helper.response(res, `success`, `Current Location has been updated`, 200);
+    } catch(err){
+      console.log(err);
+      return helper.response(res, 'fail', 'Internal Server Error', 500)
+    }
   }
 }

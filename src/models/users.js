@@ -43,5 +43,26 @@ module.exports = {
         resolve(result)
       })
     })
+  },
+  searchUsersModel: function(name){
+    return new Promise((resolve, reject)=>{
+      connection.query(`SELECT * FROM users WHERE username OR fullname LIKE '%${name}%'`, function(error, result){
+        if(error){
+          reject(error)
+        }
+        resolve(result)
+      })
+    })
+  },
+  setLocationModel: function(lat, lon, id){
+    return new Promise((resolve, reject)=>{
+      connection.query(`UPDATE users SET latitude = ?, longitude = ? WHERE users.id = ?`,[lat, lon, id], function(error, result){
+        if(error){
+          reject(error)
+        }
+        console.log(result)
+        resolve(result)
+      })
+    })
   }
 }
